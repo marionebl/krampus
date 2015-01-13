@@ -1,0 +1,23 @@
+{
+  "name": "krampus",
+  "version": "0.0.1",
+  "description": "CLI tool for killing processes occupying a certain port",
+  "main": "lib/index.js",
+  "bin": "bin/krampus",
+  "keywords": [
+    "tool",
+    "cli",
+    "ports"
+  ],
+  "author": "Mario Nebl <hello@mario-nebl.de>",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.1.0",
+    "rc": "^0.5.1",
+    "shelljs": "^0.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/marionebl/krampus.git"
+  }
+}
