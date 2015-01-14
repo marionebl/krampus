@@ -1,6 +1,6 @@
 {
   "name": "krampus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI tool for killing processes occupying a certain port",
   "main": "lib/index.js",
   "bin": "bin/krampus",
