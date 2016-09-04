@@ -2,9 +2,7 @@
 
 > Kill processes occupying a port
 
-<div align="center">
-  ![krampus usage](./krampus.gif)
-</div>
+![krampus usage](./krampus.gif)
 
 * :rocket: dead simple
 * :earth_africa: cross platform
