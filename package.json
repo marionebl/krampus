@@ -1,9 +1,21 @@
 {
   "name": "krampus",
-  "version": "0.0.2",
-  "description": "CLI tool for killing processes occupying a certain port",
-  "main": "lib/index.js",
-  "bin": "bin/krampus",
+  "version": "1.0.0",
+  "description": "Kill processes occupying a port",
+  "main": "index.js",
+  "bin": "cli.js",
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "scripts": {
+    "lint": "standard",
+    "start": "ava --watch",
+    "test": "standard && ava"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "keywords": [
     "tool",
     "cli",
@@ -11,13 +23,24 @@
   ],
   "author": "Mario Nebl <hello@mario-nebl.de>",
   "license": "MIT",
-  "dependencies": {
-    "minimist": "^1.1.0",
-    "rc": "^0.5.1",
-    "shelljs": "^0.3.0"
-  },
   "repository": {
     "type": "git",
     "url": "http://github.com/marionebl/krampus.git"
+  },
+  "dependencies": {
+    "get-stdin": "^5.0.1",
+    "is-number": "^2.1.0",
+    "meow": "^3.7.0",
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-eslint": "^6.1.2",
+    "execa": "^0.4.0",
+    "get-port": "^2.1.0",
+    "get-server-port": "^1.0.0",
+    "range": "0.0.3",
+    "standard": "^8.0.0",
+    "unexpected": "^10.17.0"
   }
 }
