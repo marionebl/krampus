@@ -1,5 +1,5 @@
-const lsofi = require('./lsofi')
 const num = require('is-number')
+const lsofi = require('./lsofi')
 
 module.exports = krampus
 
@@ -15,7 +15,11 @@ function krampus (port) {
       if (pid === null) {
         return [port]
       }
-      process.kill(pid)
-      return [port, pid]
+      return kill(pid)
+        .then(() => [port, pid])
     })
+}
+
+function kill (pid) {
+  return Promise.resolve(process.kill(pid))
 }

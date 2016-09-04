@@ -7,10 +7,6 @@ getPort()
     const server = net.createServer()
     server.listen(port, () => {
       send({port, pid, type: 'start'})
-
-      process.on('SIGTERM', () => {
-        send({port, pid, type: 'stop'})
-      })
     })
   })
 

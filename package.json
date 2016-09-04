@@ -9,9 +9,10 @@
     "cli.js"
   ],
   "scripts": {
+    "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "lint": "standard",
     "start": "ava --watch",
-    "test": "standard && ava"
+    "test": "standard && npm run deps && ava"
   },
   "standard": {
     "parser": "babel-eslint"
@@ -38,6 +39,7 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-eslint": "^6.1.2",
+    "dependency-check": "^2.6.0",
     "execa": "^0.4.0",
     "get-port": "^2.1.0",
     "get-server-port": "^1.0.0",

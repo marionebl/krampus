@@ -17,19 +17,17 @@ function lsofi (port) {
     ? [null, 'remote', 'local', null, 'pid']
     : [null, 'pid', null, null, null, null, null, null, null]
 
-  const transform = collate(columns, {port})
+  const filter = isWindows
+    ? windowsFilter(port)
+    : unixFilter(port)
+
+  const transform = collate(columns, filter)
   const parser = through2.obj(function (chunk, enc, cb) {
     transform.call(this, chunk, cb)
   })
 
   return new Promise((resolve, reject) => {
-    parser.on('data', chunk => {
-      const pid = chunk.pid && Number(chunk.pid)
-      if (num(pid)) {
-        resolve(pid)
-      }
-      resolve(null)
-    }) // bail as soon as possible
+    parser.on('data', chunk => resolve(chunk)) // bail as soon as possible
     parser.on('end', chunk => resolve(null)) // nothing found
     parser.on('error', error => reject(error)) // burp
 
@@ -66,10 +64,14 @@ function breakwords () {
 }
 
 // columns:[String] => words:[String], cb:Function => entry{pid: Number|Null}>
-function collate (columns) {
+function collate (columns, filter) {
   return function (words, cb) {
     const entry = columns.reduce((entry, column, index) => {
       if (column === null) {
+        return entry
+      }
+
+      if (!words[index]) {
         return entry
       }
 
@@ -79,12 +81,63 @@ function collate (columns) {
 
       const amend = {}
       amend[column] = words[index]
-      return Object.assign(entry || {}, amend)
+      return Object.assign({}, entry, amend)
     }, {})
 
-    if (Object.keys(entry).length > 0) {
-      this.push(entry)
+    const filtered = filter(entry)
+
+    if (filtered) {
+      this.push(filtered)
     }
     cb()
+  }
+}
+
+function windowsFilter (port) {
+  return i => {
+    const ports = [i.remote, i.local]
+      .filter(Boolean)
+      .filter(address => address !== '*:*')
+      .map(address => {
+        const fragments = address.split(':')
+        return Number(fragments[fragments.length - 1])
+      })
+      .filter(port => num(port))
+
+    if (!ports.length) {
+      return false
+    }
+
+    if (ports.indexOf(port) === -1) {
+      return false
+    }
+
+    const pid = Number(i.pid)
+
+    if (!num(pid)) {
+      return false
+    }
+
+    return pid
+  }
+}
+
+function unixFilter (port) {
+  return i => {
+    if (typeof i !== 'object') {
+      return false
+    }
+
+    if (Object.keys(i).length === 0) {
+      return false
+    }
+
+    const pid = Number(i.pid)
+
+    if (!num(pid)) {
+      return false
+    }
+
+    return pid
   }
 }

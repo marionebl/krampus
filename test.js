@@ -115,10 +115,11 @@ function server () {
 
     const onStop = function () {
       return new Promise((resolve, reject) => {
-        child.on('message', message => {
-          if (message.type === 'stop') {
-            resolve(true)
-          }
+        if (child.killed) {
+          return resolve(true)
+        }
+        child.on('exit', message => {
+          resolve(true)
         })
       })
     }
