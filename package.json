@@ -19,7 +19,9 @@
   "keywords": [
     "tool",
     "cli",
-    "ports"
+    "ports",
+    "lsof",
+    "netstat"
   ],
   "author": "Mario Nebl <hello@mario-nebl.de>",
   "license": "MIT",

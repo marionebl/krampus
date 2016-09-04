@@ -3,14 +3,14 @@ const childProcess = require('child_process')
 const num = require('is-number')
 const through2 = require('through2')
 
-module.exports = netstat
+module.exports = lsofi
 
 const isWindows = os.platform() === 'win32'
 
 // port:Number => Promise<results[Number, Number]>
-function netstat (port) {
+function lsofi (port) {
   const command = isWindows
-    ? ['netstat.exe', '-a -n -o']
+    ? ['netstat.exe', '-a', '-n', '-o']
     : ['lsof', `-i:${port}`]
 
   const columns = isWindows
@@ -39,8 +39,6 @@ function netstat (port) {
       .pipe(breaklines()) // break buffer chunks into lines
       .pipe(breakwords()) // break line strings into words
       .pipe(parser)
-
-    child.stderr.pipe(process.stderr)
   })
 }
 

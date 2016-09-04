@@ -1,4 +1,4 @@
-const netstat = require('./netstat')
+const lsofi = require('./lsofi')
 const num = require('is-number')
 
 module.exports = krampus
@@ -10,7 +10,7 @@ function krampus (port) {
     return Promise.reject('port must be a number')
   }
 
-  return netstat(port)
+  return lsofi(port)
     .then(pid => {
       if (pid === null) {
         return [port]
