@@ -33,8 +33,8 @@
   "dependencies": {
     "get-stdin": "^5.0.1",
     "is-number": "^2.1.0",
-    "meow": "^3.7.0",
-    "through2": "^2.0.1"
+    "lsofi": "^1.0.0",
+    "meow": "^3.7.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",

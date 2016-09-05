@@ -1,5 +1,5 @@
 const num = require('is-number')
-const lsofi = require('./lsofi')
+const lsofi = require('lsofi')
 
 module.exports = krampus
 
