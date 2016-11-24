@@ -1,8 +1,8 @@
-> :smiling_imp: Kill processes occupying a port
+# krampus [![stability][0]][1]
+
+> `krampu:s` - :smiling_imp: Kill processes occupying a port
 
 ![krampus usage](./krampus.gif)
-
-# krampus [![stability][0]][1]
 
 [![npm version][6]][7] [![Travis branch][2]][3] [![AppVeyor branch][4]][5]
 
